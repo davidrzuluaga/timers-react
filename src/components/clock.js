@@ -18,7 +18,7 @@ class Clock extends Component {
       this.clock()
     }
     clock = () => {
-      var clocks = this.state.clocks.map((clock, index) => clock.running ? {id: clock.id, name: clock.name, description: clock.description, timer: clock.timer + 1000, running: clock.running} : clock ) 
+      var clocks = this.state.clocks.map((clock, index) => clock.running ? {id: clock.id, name: clock.name, description: clock.description, timer: clock.timer + 1000, running: clock.running, state: clock.state} : clock ) 
       this.setClock(clocks)
       setTimeout(this.clock, 1000)
     }

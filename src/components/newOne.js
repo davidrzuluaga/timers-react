@@ -21,7 +21,7 @@ class New extends Component {
     var newClockID = Math.max(...this.state.clocks.map(clock => clock.id)) + 1
     var defaultTitle = this.state.title === "" ? `Timer ${newClockID}` : this.state.title
     var defaultProject = this.state.project === "" ? `Timer ${newClockID}` : this.state.project
-    var clocks = this.state.clocks.concat({id: newClockID, name: defaultTitle, description: defaultProject, timer: 0, running: false})
+    var clocks = this.state.clocks.concat({id: newClockID, name: defaultTitle, description: defaultProject, timer: 0, running: false, state: ""})
     this.setClock(clocks)
     this.setState({
       title: "",

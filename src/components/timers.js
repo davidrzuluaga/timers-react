@@ -9,7 +9,7 @@ class Timers extends Component {
   constructor() {
     super()
     this.state = {
-      clocks: sampleClocks
+      clocks: sampleClocks,
     }
     store.subscribe(() => {
       this.setState({
@@ -36,11 +36,9 @@ class Timers extends Component {
     while (padded.length < size) padded = `0${padded}`;
     return padded;
   }
-
-
   pauseTimer = (e) => {
     const index = this.state.clocks.findIndex(clock => clock.id === Math.floor(e.target.id));
-    var clocks = this.state.clocks.map((clock, i) => index === i ? {id: clock.id, name: clock.name, description: clock.description, timer: clock.timer, running: !clock.running} : clock ) 
+    var clocks = this.state.clocks.map((clock, i) => index === i ? {id: clock.id, name: clock.name, description: clock.description, timer: clock.timer, running: !clock.running, state: clock.state} : clock ) 
     this.setClock(clocks)
   }
   setClock(clocks) {    
@@ -55,13 +53,21 @@ class Timers extends Component {
       <div>
         {this.state.clocks.map((clock, index) =>  
         <Col  key={clock.id} sm={4}>
-          <Panel>
-              <Panel.Heading><Panel.Title>{clock.name}</Panel.Title></Panel.Heading>
-              <Panel.Body><p className="clockdescription">{clock.description}</p></Panel.Body>
-                  <p className="clockrunning">{this.millisecondsToHuman(clock.timer)}</p>       
-                  <Buttons clock = {clock} />
-              <Panel.Footer id={clock.id} className={clock.running ? "running" : "stopped" } onClick={this.pauseTimer}>{clock.running ? "Stop" : "Start" }</Panel.Footer>
-          </Panel>
+            <Panel>
+              <Panel.Heading className={clock.state === "editing" ? "hidden" : ""}><Panel.Title >{clock.name}</Panel.Title></Panel.Heading>
+              <div className={clock.state === "editing" ? "hidden" : ""}>
+                <Panel.Body>
+                  <p className="clockdescription">{clock.description}</p>
+                </Panel.Body>
+                <p className="clockrunning">{this.millisecondsToHuman(clock.timer)}</p>       
+              </div>
+              <Buttons clock = {clock} />
+              <div className={clock.state === "editing" ? " hidden " : ""}>
+                <Panel.Footer id={clock.id} className={clock.running ? " running " : " stopped " } onClick={this.pauseTimer}>
+                  {clock.running ? "Stop" : "Start" }
+                </Panel.Footer>
+              </div>
+            </Panel>
         </Col>
         )}
       </div>
