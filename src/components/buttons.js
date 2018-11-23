@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Glyphicon } from 'react-bootstrap'
+import { Glyphicon } from 'react-bootstrap'
 import store from "../store";
 
 class Buttons extends Component {
@@ -7,15 +7,13 @@ class Buttons extends Component {
 constructor(props) {
     super(props)
     this.state = {
-        clocks: [],
         title: "",
-        project: ""
+        project: "",
+        editor: "hidden"
     }
     store.subscribe(() => {
       this.setState({
-        clocks: store.getState().clocks,
-        formShow: store.getState().formShow,
-        iconShow: store.getState().iconShow
+        clocks: store.getState().clocks
       })
     })
   }
@@ -40,14 +38,10 @@ constructor(props) {
     render() {
       return (
             <div className="clockoptions">
-                <Button id={this.props.clock.id} bsSize="small" onClick={this.deleteTimer}> 
-                    <Glyphicon glyph="glyphicon glyphicon-trash" />
-                </Button>
-                <Button id={this.props.clock.id} bsSize="small" onClick={this.check}> 
-                    <Glyphicon glyph="glyphicon glyphicon-pencil" />
-                </Button>
+                <Glyphicon id={this.props.clock.id} className="clickableGly" onClick={this.deleteTimer} glyph="glyphicon glyphicon-trash" />
+                <Glyphicon id={this.props.clock.id} className="clickableGly" onClick={this.check} glyph="glyphicon glyphicon-pencil" />
             </div>
-          )
+            )
         }
     }
     

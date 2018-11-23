@@ -4,7 +4,7 @@ import store from "../store";
 import { Col, Panel} from 'react-bootstrap'
 import Buttons from './buttons';
 
-class Timers extends Component {
+class Timers extends Component { 
 
   constructor() {
     super()
@@ -13,9 +13,7 @@ class Timers extends Component {
     }
     store.subscribe(() => {
       this.setState({
-        clocks: store.getState().clocks,
-        formShow: store.getState().formShow,
-        iconShow: store.getState().iconShow
+        clocks: store.getState().clocks
       })
     })
   }
@@ -51,10 +49,7 @@ class Timers extends Component {
         clocks: clocks
     })
   }
-  check = (e) => {
-    console.log(e.target.id)
-  }
-  
+ 
   render() {
     return (
       <div>

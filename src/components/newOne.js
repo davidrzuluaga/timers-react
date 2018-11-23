@@ -13,33 +13,29 @@ class New extends Component {
     }
     store.subscribe(() => {
       this.setState({
-        clocks: store.getState().clocks,
-        formShow: store.getState().formShow,
-        iconShow: store.getState().iconShow
+        clocks: store.getState().clocks
       })
     })
   }
   newTimer = () => {
-    var taskId = this.state.clocks.length + 1
-    var defaultTitle = this.state.title === "" ? `Timer ${taskId}` : this.state.title
-    var defaultProject = this.state.project === "" ? `Timer ${taskId}` : this.state.project
-    var clocks = this.state.clocks.concat({id: taskId, name: defaultTitle, description: defaultProject, timer: 0, running: false})
+    var newClockID = Math.max(...this.state.clocks.map(clock => clock.id)) + 1
+    var defaultTitle = this.state.title === "" ? `Timer ${newClockID}` : this.state.title
+    var defaultProject = this.state.project === "" ? `Timer ${newClockID}` : this.state.project
+    var clocks = this.state.clocks.concat({id: newClockID, name: defaultTitle, description: defaultProject, timer: 0, running: false})
     this.setClock(clocks)
     this.setState({
       title: "",
       project: ""
     })
   }
-  formShow() {    
-    store.dispatch( {
-        type: "formShow",
+  formShow = () => {    
+    this.setState({
         formShow: "",
         iconShow: "hidden"
     })
   }
-  formHide() {    
-    store.dispatch( {
-        type: "formShow",
+  formHide = () => {    
+    this.setState({
         formShow: "hidden",
         iconShow: ""
     })

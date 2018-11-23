@@ -6,15 +6,9 @@ const reducer = (state, action) => {
             ...state,
             clocks: action.clocks
         }
-    } else if (action.type === "formShow") {
-        return {
-            ...state,
-            formShow: action.formShow,
-            iconShow: action.iconShow
-        }
-    }
+    } 
     return state;
 
 }
 
-export default createStore(reducer, {formShow: "hidden", iconShow: ""}, applyMiddleware());
+export default createStore(reducer, {}, applyMiddleware());

@@ -30,3 +30,9 @@
 .hidden {
  visibility: hidden 
  }
+.clickableGly {
+  margin-left: 10px
+}
+.clickableGly:hover {
+  cursor: pointer;
+}
